@@ -12,10 +12,14 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
+    private Animator pAni;
+
+    private bool isGiant = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        pAni = GetComponent<Animator>();
     }
 
     private void Update()
@@ -23,11 +27,23 @@ public class PlayerController : MonoBehaviour
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
-        if (moveInput < 0)
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        if(isGiant)
+        {
+            if (moveInput < 0)
+                transform.localScale = new Vector3(2f, 2f, 1f);
 
-        if (moveInput > 0)
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            if (moveInput < 0)
+                transform.localScale = new Vector3(-2f, 2f, 1f);
+        }
+
+        else
+        {
+            if (moveInput < 0)
+                transform.localScale = new Vector3(1f, 1f, 1f);
+
+            if (moveInput > 0)
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
 
         isGrounded = Physics2D.OverlapCircle(groumdCheck.position, 0.2f, groundLayer);
 
@@ -47,6 +63,20 @@ public class PlayerController : MonoBehaviour
       if (collision.CompareTag("Finish"))
         {
             collision.GetComponent<LevelObject>().MoveTonextLevel();
+        }
+
+      if(collision.CompareTag("Enemy"))
+        {
+            if (isGiant)
+                Destroy(Collision.gameObject);
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+      if (collision.CompareTag("Item"))
+        {
+            isGiant = true;
+            Destroy(collision.gameObject);
         }
     }
 }

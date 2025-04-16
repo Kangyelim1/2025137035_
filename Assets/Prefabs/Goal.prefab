@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d67d3c85b8587449a05a5d9fa3d906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Lenel_2
+  nextLevel: Level_2

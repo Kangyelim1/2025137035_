@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform groumdCheck;
     public LayerMask groundLayer;
 
+    [SerializeField]
     private bool isGiant = false;
     private bool mj = false;
 
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Ãæµ¹µÊ");
         if (collision.CompareTag("Respawn"))
         {
             if(isGiant)
@@ -75,7 +77,21 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-       // switch (collision.tag)
+        if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log("Ãæµ¹µÊ");
+            if (isGiant)
+            {
+                Destroy(collision.gameObject);
+            }
+
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+
+        // switch (collision.tag)
         {
         //    case "item":
          //       isGiant = true;

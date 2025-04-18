@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
@@ -18,6 +19,10 @@ public class PlayerController : MonoBehaviour
     private Animator pAni;
     private bool isGrounded;
 
+    public GameObject projectilePrefab;
+    public Transform firePoint;
+    public float projectileSpeed = 10f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
 
 
         isGrounded = Physics2D.OverlapCircle(groumdCheck.position, 0.2f, groundLayer);
@@ -48,12 +54,15 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = new Vector3(-1f, 1f, 1f);
         }
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && Input.GetKeyDown(KeyCode.E))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             pAni.SetTrigger("JumpAction");
         }
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            FireProjectile();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -91,6 +100,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage();
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+                EnemyController enemy = collision.GetComponent<EnemyController>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage();
+                }
+                Destroy(gameObject); // 적과 충돌 시 공 파괴
+            }
+        }
+
         // switch (collision.tag)
         {
         //    case "item":
@@ -98,5 +129,20 @@ public class PlayerController : MonoBehaviour
          //       mj = true;
          //       break;
         }
+        
+
+    }
+    void FireProjectile()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+        if (projectileRb != null)
+        {
+            projectileRb.velocity = firePoint.right * projectileSpeed;
+        }
+        Destroy(projectile, 2f); // 2초 후 자동으로 파괴
     }
 }
+
+
+

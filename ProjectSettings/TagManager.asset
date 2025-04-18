@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Item
   - Obstacle
+  - speed
+  - Jump
   layers:
   - Default
   - TransparentFX

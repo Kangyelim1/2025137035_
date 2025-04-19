@@ -2090,6 +2090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  maxHealth: 3
 --- !u!61 &1096908502
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2328,7 +2329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8835661789543912802, guid: 856bebe45325c7b4fb79ae7bb356c720, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -10,6 +10,8 @@ TagManager:
   - Obstacle
   - speed
   - Jump
+  - itemTag
+  - ' EnemyTraceCont'
   layers:
   - Default
   - TransparentFX

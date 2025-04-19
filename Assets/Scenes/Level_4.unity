@@ -545,7 +545,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3084, y: 0.02, z: 0}
-  m_LocalScale: {x: 1.03, y: 0.93, z: 1}
+  m_LocalScale: {x: 1.16, y: 0.93, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -622,10 +622,9 @@ GameObject:
   - component: {fileID: 525039356}
   - component: {fileID: 525039358}
   - component: {fileID: 525039357}
-  - component: {fileID: 525039359}
   m_Layer: 0
-  m_Name: speed
-  m_TagString: Untagged
+  m_Name: SpeedBoostItem
+  m_TagString: itemTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -742,18 +741,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &525039359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525039355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e43851f312975d9459d1501e3d90c32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &717317164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,8 +1186,8 @@ Tilemap:
   - first: {x: 13, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileIndex: 4
+      m_TileSpriteIndex: 0
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1364,16 +1351,18 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 67ae176926b548b4f807381a71e281ec, type: 2}
   - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: 44664167c5196434faf1d14724fd47ae, type: 2}
-  - m_RefCount: 26
+  - m_RefCount: 25
     m_Data: {fileID: 11400000, guid: 540972a9870f9e149bd760513c4e6a61, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 79c7f8e869375174fa3bc7b317bce68d, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: d89bd4bf8ee0cd64fa54d3fbc5f43f78, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: 21300000, guid: 3da37ff94227669459fb145c47ec95f2, type: 3}
   - m_RefCount: 15
     m_Data: {fileID: 21300000, guid: 4b386150286d9784e992da1767ffe2ed, type: 3}
-  - m_RefCount: 26
+  - m_RefCount: 25
     m_Data: {fileID: 21300000, guid: c135b20214983e54f9261711f5b4caef, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 51
@@ -2221,7 +2210,7 @@ Transform:
   m_GameObject: {fileID: 728031174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.86, y: 7.5, z: -8.386064}
+  m_LocalPosition: {x: 14.74, y: 5.88, z: -8.386064}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2676,6 +2665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  maxHealth: 3
 --- !u!61 &1096908502
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2846,11 +2836,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 942335926239671769, guid: 856bebe45325c7b4fb79ae7bb356c720, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.44
+      value: 13.67
       objectReference: {fileID: 0}
     - target: {fileID: 942335926239671769, guid: 856bebe45325c7b4fb79ae7bb356c720, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.21
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 942335926239671769, guid: 856bebe45325c7b4fb79ae7bb356c720, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2910,7 +2900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8835661789543912802, guid: 856bebe45325c7b4fb79ae7bb356c720, type: 3}
       propertyPath: jumpForce
-      value: 4.4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8835661789543912802, guid: 856bebe45325c7b4fb79ae7bb356c720, type: 3}
       propertyPath: moveSpeed

@@ -8,14 +8,20 @@ public class EnemyTraceController : MonoBehaviour
     public float raycastDistance = 5f;
     public float traceDistance = 10000f;
 
+    public int maxHealth = 3; // 적의 최대 체력 (Inspector에서 조절 가능)
+    private int currentHealth; // 적의 현재 체력
 
     private Transform player;
 
+    private Rigidbody2D rb;
     private bool isTracking = false;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth; // 시작 시 체력을 최대로 설정
     }
 
     private void Update()
@@ -53,10 +59,29 @@ public class EnemyTraceController : MonoBehaviour
         {
             transform.Translate(directionNormalized * moveSpeed * Time.deltaTime);
         }
-    }
 
 
     }
+
+    public void TakeDamage(int damageAmount) // 데미지 양을 인자로 받도록 수정
+    {
+        currentHealth -= damageAmount;
+        Debug.Log(gameObject.name + "이(가) " + damageAmount + " 데미지를 받음. 현재 체력: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log(gameObject.name + " 사망!");
+        Destroy(gameObject); // 적 오브젝트 파괴 (원하는 사망 처리 추가 가능)
+    }
+
+   
+}
 
     // Update is called once per frame
     //void Update()

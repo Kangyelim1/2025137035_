@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
 
             while (JumpBoostStartTime < jumpBoostDuration)
             {
-                jumpForce = 8f; // 점프증가
+                jumpForce = 7f; // 점프증가
                 isJumpBoosted = true; // 점프 증가 상태 표시
                 JumpBoostStartTime += Time.deltaTime;
                 yield return null;

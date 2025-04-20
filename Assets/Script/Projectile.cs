@@ -14,8 +14,10 @@ public class Projectile : MonoBehaviour
    
 
     private Transform target;
+
     void Start()
     {
+
         Destroy(gameObject, lifeTime);
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (target == null)
@@ -24,7 +26,7 @@ public class Projectile : MonoBehaviour
         }
 
         // 스크립트가 활성화될 때 공을 비활성화합니다.
-        gameObject.SetActive(false);
+       // gameObject.SetActive(false);
 
         // 발사 후 lifeTime이 지나면 자동으로 소멸시킵니다.
         Destroy(gameObject, lifeTime);
@@ -109,6 +111,7 @@ public class Projectile : MonoBehaviour
         {
             Debug.LogError("Projectile Prefab 또는 Launch Point가 설정되지 않았습니다!");
         }
+
     }
 
 }

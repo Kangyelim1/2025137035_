@@ -33,10 +33,15 @@ public class PlayerController : MonoBehaviour
 
     public KeyCode attackKey = KeyCode.E; // 공격 키 (Inspector에서 변경 가능)
 
+    float score;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         pAni = GetComponent<Animator>();
+
+        score = 1000f;
+
     }
     void Start()
     {
@@ -73,6 +78,8 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             pAni.SetTrigger("JumpAction");
         }
+
+        score -= Time.deltaTime;
 
         // 공격 키가 눌리면 Attack 함수 호출
         if (Input.GetKeyDown(attackKey))
@@ -123,6 +130,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("Finish"))
         {
+            HighScore.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
             collision.GetComponent<LevelObject>().MoveTonextLevel();
         }
         if (collision.CompareTag("Item"))

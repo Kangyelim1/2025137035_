@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-      
+
     }
 
     private float attackCooldown = 0.2f; // 발사 간격
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         Debug.Log("공격!");
-      
+
         if (projectilePrefab != null && launchPoint != null)
         {
             Debug.Log("투사체 생성 요청");
@@ -130,87 +130,87 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("Finish"))
         {
-            HighScore.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
-            collision.GetComponent<LevelObject>().MoveTonextLevel();
-        }
-        if (collision.CompareTag("Item"))
-        {
-            isGiant = true;
-            Destroy(collision.gameObject);
-        }
-        if (collision.CompareTag("itemTag"))
-        {
-            StartCoroutine(ActivateSpeedBoost());
-            Destroy(collision.gameObject);
-        }
-        if (collision.CompareTag("Jump"))
-        {
-            StartCoroutine(ActivateJumpBoost());
-            Destroy(collision.gameObject);
-        }
-        if (collision.CompareTag("Enemy"))
-        {
-            Debug.Log("충돌됨");
-            if (isGiant)
+            //HighScore.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
+            StageResultSaver.SaveStage(SceneManager.GetActiveScene().buildIndex, (int)score);
+            if (collision.CompareTag("Item"))
             {
+                isGiant = true;
                 Destroy(collision.gameObject);
             }
-
-            else
+            if (collision.CompareTag("itemTag"))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                StartCoroutine(ActivateSpeedBoost());
+                Destroy(collision.gameObject);
             }
-        }
-
-        // 속도 증가 기능
-        IEnumerator ActivateSpeedBoost()
-        {
-            float SpeedStartTime = 0f;
-
-            while (SpeedStartTime < speedBoostDuration)
+            if (collision.CompareTag("Jump"))
             {
-                moveSpeed = baseMoveSpeed * 2f; // 속도 증가
-                isSpeedBoosted = true; // 속도 증가 상태 표시
-                SpeedStartTime += Time.deltaTime;
-                yield return null;
+                StartCoroutine(ActivateJumpBoost());
+                Destroy(collision.gameObject);
             }
-
-            moveSpeed = baseMoveSpeed; // 원래 속도로 복귀
-            isSpeedBoosted = false; // 속도 증가 종료
-        }
-
-        // 점프 관련 기능
-        IEnumerator ActivateJumpBoost()
-        {
-            float JumpBoostStartTime = 0f;
-
-            while (JumpBoostStartTime < jumpBoostDuration)
+            if (collision.CompareTag("Enemy"))
             {
-                jumpForce = 7f; // 점프증가
-                isJumpBoosted = true; // 점프 증가 상태 표시
-                JumpBoostStartTime += Time.deltaTime;
-                yield return null;
+                Debug.Log("충돌됨");
+                if (isGiant)
+                {
+                    Destroy(collision.gameObject);
+                }
+
+                else
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
             }
 
-            jumpForce = baseJumpForce; // 원래 점프로 복귀
-            isJumpBoosted = false; // 점프 증가 종료
+            // 속도 증가 기능
+            IEnumerator ActivateSpeedBoost()
+            {
+                float SpeedStartTime = 0f;
+
+                while (SpeedStartTime < speedBoostDuration)
+                {
+                    moveSpeed = baseMoveSpeed * 2f; // 속도 증가
+                    isSpeedBoosted = true; // 속도 증가 상태 표시
+                    SpeedStartTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                moveSpeed = baseMoveSpeed; // 원래 속도로 복귀
+                isSpeedBoosted = false; // 속도 증가 종료
+            }
+
+            // 점프 관련 기능
+            IEnumerator ActivateJumpBoost()
+            {
+                float JumpBoostStartTime = 0f;
+
+                while (JumpBoostStartTime < jumpBoostDuration)
+                {
+                    jumpForce = 7f; // 점프증가
+                    isJumpBoosted = true; // 점프 증가 상태 표시
+                    JumpBoostStartTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                jumpForce = baseJumpForce; // 원래 점프로 복귀
+                isJumpBoosted = false; // 점프 증가 종료
+            }
+
+
+
+            // switch (collision.tag)
+
+            //    case "item":
+            //       isGiant = true;
+            //       mj = true;
+            //       break;
+
+
+
+
         }
-
-
-
-        // switch (collision.tag)
-
-        //    case "item":
-        //       isGiant = true;
-        //       mj = true;
-        //       break;
-
-
 
 
     }
-
-    
 }
  
 
